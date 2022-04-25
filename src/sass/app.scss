@@ -1,0 +1,98 @@
+@charset "UTF-8";
+@import "./variable";
+
+@mixin headerBtn($color) {
+  float: left;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: $color;
+}
+
+@mixin mainBtn($color) {
+  margin-top: 10px;
+  width: 150px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 5px solid $white;
+  background: $color;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.wrapper {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.header {
+  position: relative;
+  background-color: $navy;
+  height: 100px;
+
+  &__box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: $white;
+    padding: 10px;
+
+    &__btn {
+      @each $className in $classNames {
+        $index_key: index($classNames, $className);
+
+        &.is-#{$className} {
+          @include headerBtn(nth($buttonColor, $index_key));
+        }
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.green {
+  float: left;
+  width: 150px;
+  height: 250px;
+  background-color: $green;
+}
+
+.main {
+  position: relative;
+  float: left;
+  width: 250px;
+  height: 250px;
+  background-color: $red;
+
+  &__box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+
+    &__btn {
+      @each $className in $classNames {
+        $index_key: index($classNames, $className);
+
+        &.is-#{$className} {
+          @include mainBtn(nth($buttonColor, $index_key));
+        }
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.footer {
+  background-color: $brown;
+  height: 100px;
+}
